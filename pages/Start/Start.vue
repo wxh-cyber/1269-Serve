@@ -1,0 +1,409 @@
+<template>
+  <view class="container">
+	<!-- 顶部标题 -->
+    <view class="title">1269服务专区</view>
+
+    <!-- 卡片模块区域 -->
+    <view class="modules">
+	  <!-- 左侧申请企业上链 -->
+      <view class="apply-chain">
+        <image class="img-occupy" src="/static/Start/申请企业上链.png" mode="aspectFill" />
+				
+	    	<!-- 卡片内部信息模块 -->
+	    	<view class="left-card-inner">
+		    	<text class="small-text">申请</text>
+		    	<text class="big-text">企业上链</text>
+			    <view class="btn">上链申请</view>
+		    </view>
+      </view>
+
+      <!-- 右侧两个垂直的申请信息 -->
+      <view class="apply-information">
+				<!-- 右侧上部蓝色卡片 -->
+        <view class="card blue">
+					<!-- 卡片背景 -->
+          <image class="img-occupy" src="/static/Start/上链企业数.png" mode="aspectFill" />
+					
+					<!-- 卡片内部信息 -->
+	    	  <view class="right-card-inner">
+			      <view class="right-text-group">
+							<text class="right-title">上链企业数</text>
+							<view class="right-count-row">
+								<text class="right-count">2008</text>
+								<text class="right-unit">家</text>
+							</view>
+						</view>
+						
+						<!-- 卡片右侧图标 -->
+						<view class="right-icon-wrap">
+							<image class="right-icon" src="/static/Start/企业.png" mode="aspectFill" />
+						</view>
+		      </view>
+					
+        </view>
+				
+				<!-- 右侧下部绿色卡片 -->
+        <view class="card green">
+					<!-- 卡片背景 -->
+          <image class="img-occupy" src="/static/Start/产业链图谱.png" mode="aspectFill" />
+					
+					<!-- 卡片内部信息 -->
+					<view class="right-card-inner">
+						<view class="right-card-text-wrap">
+							<!-- 上侧标题 -->
+					  	<text class="right-title">产业链图谱</text>
+						
+				  		<!-- 下侧胶囊按钮区域 -->
+				  		<view class="green-card-pill-wrap">
+						  	<image 
+	    					  	class="green-card-pill-bg" 
+						   			src="/static/Start/产业链图谱圆角矩形.png" 
+				  					mode="aspectFill" 
+					  		/>
+							  <text class="green-card-pill-text">点击进入</text>
+					  	</view>
+						</view>
+						
+						<!-- 卡片右侧图标 -->
+						<view class="green-card-icon-wrap">
+							<image 
+							    class="green-card-icon-bg" 
+									src="/static/Start/产业链图谱图标背景.png" 
+									mode="aspectFill"
+							/>
+							<image 
+							    class="green-card-icon"
+									src="/static/Start/知识图谱.png"
+									mode="aspectFill"
+							 />
+						</view>
+						
+					</view>
+        </view>
+				
+      </view>
+    </view>
+		
+		<!-- 中央菜单 -->
+		<MiddleMenu :middleList="middleList" />
+		
+		<!-- 底部产业链动态 -->
+		<!-- <ChainActivity /> -->
+  </view>
+</template>
+
+<script setup>
+import MiddleMenu from '../../components/Start/MiddleMenu.vue';
+import ChainActivity from '../../components/Start/ChainActivity.vue';
+
+const middleList=[
+	{
+		id:1,
+		text:'一网通办',
+		icon:'../../static/Start/一网通办图标.png'
+	},
+	{
+		id:2,
+		text:'产业链介绍',
+		icon:'../../static/Start/产业链介绍图标.png'
+	},
+	{
+		id:3,
+		text:'产业链政策',
+		icon:'../../static/Start/产业链政策图标.png'
+	}
+];
+
+
+</script>
+
+<style scoped>
+/* 外层容器样式 */
+.container {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 65rpx 0 80rpx;
+
+  /* 定义背景颜色 */
+  background: linear-gradient(
+    to bottom,
+    rgba(39, 170, 114, 1) 0%,
+    rgba(39, 170, 114, 0.18) 42%,
+    #f6fbf7 70%,
+    #ffffff 100%
+  );
+}
+
+/* 标题样式 */
+.title {
+  color: #ffffff;
+  font-size: 48rpx;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+/* 卡片模块区域样式 */
+.modules {
+  width: 100%;
+  max-width: 960rpx;
+  box-sizing: border-box;
+  margin-top: 72rpx;
+  padding: 0 30rpx;
+
+  display: flex;
+  align-items: stretch;
+  gap: 40rpx;
+}
+
+/* 左右两侧卡片的公用样式 */
+.apply-chain,
+.apply-information {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 左侧申请企业上链样式 */
+.apply-chain {
+  position: relative;
+	height:349rpx;
+  box-sizing: border-box;
+  border: 1rpx solid rgba(255, 255, 255, 0.88);
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18rpx 40rpx rgba(39, 170, 114, 0.08);
+}
+
+/* 右侧申请信息样式 */
+.apply-information {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+/* 卡片样式 */
+.card {
+  position:relative;
+	display:flex;
+	/* 设置flex布局为水平，以保证文本和图标的正常排列 */
+	flex-direction:row;
+  width:330rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+/* 卡片背景图样式 */
+.img-occupy {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  inset:0;
+}
+
+/* 保证占满，仅在H5端进行处理，考虑跨端兼容性 */
+/* #ifdef H5 */
+:deep(.img-occupy img) {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+/* #endif */
+
+/* 蓝色卡片边框 */
+.blue {
+	background:linear-gradient(135deg,#3aa6ff,#6ec6ff);
+}
+
+/* 绿色卡片边框 */
+.green {
+	background:linear-gradient(135deg,#2bb673,#3fd38a);
+}
+
+/* 卡片内部信息样式 */
+.left-card-inner {
+	position:relative;
+	display:flex;
+	flex-direction:column;
+	margin-left:30rpx;
+	margin-top:52rpx;
+	z-index:2;
+}
+
+/* 左侧卡片较小字体 */
+.small-text {
+	font-size:30rpx;
+	font-weight:bold;
+	color:#77502f;
+}
+
+/* 左侧卡片较大字体 */
+.big-text {
+	font-size:36rpx;
+	font-weight:bold;
+	color:#77502f;
+	margin-bottom:33rpx;
+}
+
+/* 上链申请按钮样式 */
+.btn {
+	background: #a37955;
+	color:#fff;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:143rpx;
+	height:37rpx;
+	box-sizing: border-box;
+	padding:8rpx 24rpx;
+	/* 让外形呈现出胶囊效果 */
+	border-radius:9999rpx;
+	font-size:23rpx;
+	font-weight:bold;
+}
+
+/* 右侧包含卡片内信息的容器 */
+.right-card-inner {
+	position:relative;
+	box-sizing:border-box;
+	
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content:space-between;
+	gap:0;
+	
+	margin-left:0;
+	margin-top:0;
+	padding:33rpx 30rpx;
+	z-index:2;
+}
+
+/* 右侧包裹卡片文本容器的样式 */
+.right-text-group {
+	display:flex;
+	flex-direction:column;
+	gap:35rpx;
+}
+
+/* 上链企业数标题样式 */
+.right-title {
+	font-size:30rpx;
+	font-weight:bold;
+	color:#fff;
+	white-space:nowrap;
+}
+
+/* 企业数统计区域样式 */
+.right-count-row{
+	display:flex;
+	align-items:baseline;
+}
+
+/* 企业数统计数字样式 */
+.right-count {
+	font-size:30rpx;
+	font-weight:bold;
+	color:#fff;
+}
+
+/* 企业统计单位样式 */
+.right-unit {
+	font-size:21rpx;
+	font-weight:bold;
+	color:#fff;
+}
+
+/* 包裹上链企业图标容器 */
+.right-icon-wrap {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex:1;
+	
+	width:81rpx;
+	height:81rpx;
+	border-radius:50%;
+	background: #fff;
+  margin-left:30rpx;
+}
+
+/* 上链企业图标样式 */
+.right-icon {
+	width: 42rpx;
+	height: 40rpx;
+}
+
+/* 绿色卡片文本容器样式 */
+.green-card-text-wrap {
+	display:flex;
+	flex-direction:column;
+	gap:35rpx;
+}
+
+/* 绿色卡片胶囊按钮区域样式 */
+.green-card-pill-wrap {
+	position:relative;
+	width:143rpx;
+	height:37rpx;
+	border-radius:9999rpx;
+	margin-top:30rpx;
+}
+
+/* 绿色胶囊背景图片样式 */
+.green-card-pill-bg {
+	position:absolute;
+	inset:0;
+	width:100%;
+	height:100%;
+}
+
+/* 绿色胶囊内部文本样式 */
+.green-card-pill-text {
+	position:relative;
+	width:100%;
+	height:100%;
+	
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	
+	font-size:23rpx;
+	font-weight:bold;
+	color:#fff;
+}
+
+/* 包裹绿色卡片图标容器样式 */
+.green-card-icon-wrap {
+	position:relative;
+	width:80rpx;
+	height:80rpx;
+	border-radius:50%;
+	background: #fff;
+  margin-left:30rpx;
+	z-index:2;
+}
+
+/* 绿色卡片图标背景样式 */
+.green-card-icon-bg {
+	position:absolute;
+	inset:0;
+	width:100%;
+	height:100%;
+}
+
+/* 绿色卡片图标样式 */
+.green-card-icon {
+	position:absolute;
+	top:50%;
+	left:50%;
+	width: 41rpx;
+	height: 41rpx;
+	transform:translate(-50%,-50%);
+}
+
+
+</style>
