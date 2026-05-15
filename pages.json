@@ -3,7 +3,14 @@
 		{
 			"path": "pages/Start/Start",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "Start"
+			}
+		},
+		{
+			"path" : "pages/OneNet/OneNet",
+			"style" : 
+			{
+				"navigationBarTitleText" : "OneNet"
 			}
 		}
 	],

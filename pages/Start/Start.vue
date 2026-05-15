@@ -96,6 +96,7 @@
 import MiddleMenu from '../../components/Start/MiddleMenu.vue';
 import ChainActivity from '../../components/Start/ChainActivity.vue';
 
+// 中间菜单数据
 const middleList=[
 	{
 		id:1,
@@ -114,7 +115,21 @@ const middleList=[
 	}
 ];
 
-
+// 下方产业链动态数据
+const newsList=[
+	{
+		id:1,
+		title:'2024年中央驻赣单位支持南昌高质量发行...',
+		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
+		date:'8月15日'
+	},
+	{
+		id:2,
+		title:'2024年中央驻赣单位支持南昌高质量发行...',
+		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
+		date:'8月15日'
+	}
+];
 </script>
 
 <style scoped>
