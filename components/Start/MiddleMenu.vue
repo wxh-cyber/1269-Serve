@@ -2,7 +2,7 @@
 	<!-- 菜单最外层容器 -->
 	<view class="menu-container">
 		<!-- 菜单内部单个的列表项 -->
-		<view class="menu-item" v-for="(item,index) in middleList">
+		<view class="menu-item" v-for="(item,index) in middleList" :key="item.id">
 			<!-- 包裹内容的容器 -->
 			<view class="inner-content">
 				<!-- 包裹图标的容器 -->

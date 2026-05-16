@@ -88,7 +88,7 @@
 		<MiddleMenu :middleList="middleList" />
 		
 		<!-- 底部产业链动态 -->
-		<!-- <ChainActivity /> -->
+		<ChainActivity :newsList="newsList" />
   </view>
 </template>
 
@@ -121,13 +121,15 @@ const newsList=[
 		id:1,
 		title:'2024年中央驻赣单位支持南昌高质量发行...',
 		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
-		date:'8月15日'
+		date:'8月15日',
+        image:'../../static/Start/产业链动态图片.png'
 	},
 	{
 		id:2,
 		title:'2024年中央驻赣单位支持南昌高质量发行...',
 		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
-		date:'8月15日'
+		date:'8月15日',
+		image:'../../static/Start/产业链动态图片.png'
 	}
 ];
 </script>
@@ -182,13 +184,14 @@ const newsList=[
 /* 左侧申请企业上链样式 */
 .apply-chain {
   position: relative;
-	height:349rpx;
+  width:330rpx;
+  height:349rpx;
   box-sizing: border-box;
-  border: 1rpx solid rgba(255, 255, 255, 0.88);
   border-radius: 16rpx;
   overflow: hidden;
+  
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 18rpx 40rpx rgba(39, 170, 114, 0.08);
+  box-shadow: 0 10rpx 10rpx rgba(0, 0, 0, 0.10);
 }
 
 /* 右侧申请信息样式 */
@@ -201,13 +204,16 @@ const newsList=[
 /* 卡片样式 */
 .card {
   position:relative;
-	display:flex;
-	/* 设置flex布局为水平，以保证文本和图标的正常排列 */
-	flex-direction:row;
-  width:330rpx;
+  display:flex;
+  /* 设置flex布局为水平，以保证文本和图标的正常排列 */
+  flex-direction:row;
+  
+  width:342rpx;
   height: 160rpx;
   border-radius: 16rpx;
   overflow: hidden;
+  
+  box-shadow:0rpx 10rpx 10rpx rgba(0,0,0,0.1);
 }
 
 /* 卡片背景图样式 */
@@ -302,6 +308,8 @@ const newsList=[
 	display:flex;
 	flex-direction:column;
 	gap:35rpx;
+	
+	padding-top:20rpx;
 }
 
 /* 上链企业数标题样式 */
@@ -316,6 +324,7 @@ const newsList=[
 .right-count-row{
 	display:flex;
 	align-items:baseline;
+	margin-bottom:30rpx;
 }
 
 /* 企业数统计数字样式 */
@@ -366,6 +375,7 @@ const newsList=[
 	height:37rpx;
 	border-radius:9999rpx;
 	margin-top:30rpx;
+	margin-bottom:20rpx
 }
 
 /* 绿色胶囊背景图片样式 */
