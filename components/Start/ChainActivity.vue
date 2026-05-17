@@ -26,7 +26,7 @@
 				<view class="news-card-inner-wrap">
 					<!-- 卡片左侧图片 -->
 					<view class="news-card-img-wrap">
-						<image :src="item.image" class="news-card-img" mode="aspectFit" />
+						<image :src="item.image" class="news-card-img" mode="aspectFill" />
 					</view>
 					
 					<!-- 卡片右侧文本 -->
@@ -56,7 +56,8 @@ defineProps({
 .news-container {
 	display:flex;
 	flex-direction:column;
-	align-items:space-between;
+	/* 注意：align-items没有space-between这个属性值 */
+	/* align-items:space-between; */
 	
 	margin:63rpx 30rpx;
 	border-radius:16rpx;
@@ -114,7 +115,7 @@ defineProps({
 /* 单个最外层新闻卡片 */
 .news-card {
 	width:100%;
-	height:320rpx;
+	height:auto;
 	padding:30rpx;
 	background: #fff;
 	box-sizing:border-box;
@@ -181,6 +182,7 @@ defineProps({
 .news-card-text-wrap {
 	display:flex;
 	flex-direction:column;
+	flex:1;
 	
 	margin-top:30rpx;
 	/* 本身通过gap保持间距 */
@@ -189,7 +191,21 @@ defineProps({
 
 /* 卡片内部文本区域 */
 .news-card-text-content {
+ 	margin-bottom:20rpx;
+	
 	font-size:28rpx;
+	font-weight:normal;
+	color:#999;
+}
+
+/* 卡片底部日期文本样式 */
+.date {
+	/* 子元素在横轴上靠右 */
+	align-self:flex-end;
+	/* 注意在flex布局中，float会失效 */
+	/* float:right; */
+
+	font-size:24rpx;
 	font-weight:normal;
 	color:#999;
 }

@@ -101,17 +101,20 @@ const middleList=[
 	{
 		id:1,
 		text:'一网通办',
-		icon:'../../static/Start/一网通办图标.png'
+		icon:'../../static/Start/一网通办图标.png',
+		url:'/pages/OneNet/OneNet'
 	},
 	{
 		id:2,
 		text:'产业链介绍',
-		icon:'../../static/Start/产业链介绍图标.png'
+		icon:'../../static/Start/产业链介绍图标.png',
+		url:'/pages/OneNet/OneNet'
 	},
 	{
 		id:3,
 		text:'产业链政策',
-		icon:'../../static/Start/产业链政策图标.png'
+		icon:'../../static/Start/产业链政策图标.png',
+		url:'/pages/OneNet/OneNet'
 	}
 ];
 
@@ -270,20 +273,23 @@ const newsList=[
 }
 
 /* 上链申请按钮样式 */
-.btn {
-	background: #a37955;
-	color:#fff;
+.btn {	
 	display:flex;
 	justify-content:center;
 	align-items:center;
+	
 	width:143rpx;
 	height:37rpx;
 	box-sizing: border-box;
 	padding:8rpx 24rpx;
 	/* 让外形呈现出胶囊效果 */
 	border-radius:9999rpx;
+	
+	background: #a37955;
+	
 	font-size:23rpx;
 	font-weight:bold;
+    color:#fff;
 }
 
 /* 右侧包含卡片内信息的容器 */

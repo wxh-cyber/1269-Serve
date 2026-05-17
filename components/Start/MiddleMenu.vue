@@ -2,7 +2,11 @@
 	<!-- 菜单最外层容器 -->
 	<view class="menu-container">
 		<!-- 菜单内部单个的列表项 -->
-		<view class="menu-item" v-for="(item,index) in middleList" :key="item.id">
+		<view 
+		  class="menu-item" 
+		  v-for="(item,index) in middleList" 
+		  :key="item.id"
+		  @click="handleCardClick(item)">
 			<!-- 包裹内容的容器 -->
 			<view class="inner-content">
 				<!-- 包裹图标的容器 -->
@@ -25,6 +29,16 @@ defineProps({
 		required:true
 	}
 });
+
+/**
+ *  @function handleCardClick 处理卡片点击事件
+ *  @returns void
+*/
+const handleCardClick=(item)=>{
+	uni.navigateTo({
+		url:item.url
+	});
+}
 </script>
 
 <style scoped>
