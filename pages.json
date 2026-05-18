@@ -32,13 +32,6 @@
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationBarTextStyle": "black"
 			}
-		},
-		{
-			"path" : "pages/Start/Start1/Start1",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
-			}
 		}
 	],
 	"globalStyle": {
