@@ -1,140 +1,153 @@
 <template>
-  <view class="container">
-	<!-- 顶部标题 -->
-    <view class="title">1269服务专区</view>
+	<view class="container">
+		<!-- 顶部标题 -->
+		<view class="title">1269服务专区</view>
 
-    <!-- 卡片模块区域 -->
-    <view class="modules">
-	  <!-- 左侧申请企业上链 -->
-      <view class="apply-chain">
-        <image class="img-occupy" src="/static/Start/申请企业上链.png" mode="aspectFill" />
-				
-	    	<!-- 卡片内部信息模块 -->
-	    	<view class="left-card-inner">
-		    	<text class="small-text">申请</text>
-		    	<text class="big-text">企业上链</text>
-			    <view class="btn">上链申请</view>
-		    </view>
-      </view>
+		<!-- 卡片模块区域 -->
+		<view class="modules">
+			<!-- 左侧申请企业上链 -->
+			<view class="apply-chain" @click="applyChain">
+				<image class="img-occupy" src="/static/Start/申请企业上链.png" mode="aspectFill" />
 
-      <!-- 右侧两个垂直的申请信息 -->
-      <view class="apply-information">
+				<!-- 卡片内部信息模块 -->
+				<view class="left-card-inner">
+					<text class="small-text">申请</text>
+					<text class="big-text">企业上链</text>
+					<view class="btn">上链申请</view>
+				</view>
+			</view>
+
+			<!-- 右侧两个垂直的申请信息 -->
+			<view class="apply-information">
 				<!-- 右侧上部蓝色卡片 -->
-        <view class="card blue">
+				<view class="card blue">
 					<!-- 卡片背景 -->
-          <image class="img-occupy" src="/static/Start/上链企业数.png" mode="aspectFill" />
-					
+					<image class="img-occupy" src="/static/Start/上链企业数.png" mode="aspectFill" />
+
 					<!-- 卡片内部信息 -->
-	    	  <view class="right-card-inner">
-			      <view class="right-text-group">
+					<view class="right-card-inner">
+						<view class="right-text-group">
 							<text class="right-title">上链企业数</text>
 							<view class="right-count-row">
 								<text class="right-count">2008</text>
 								<text class="right-unit">家</text>
 							</view>
 						</view>
-						
+
 						<!-- 卡片右侧图标 -->
 						<view class="right-icon-wrap">
 							<image class="right-icon" src="/static/Start/企业.png" mode="aspectFill" />
 						</view>
-		      </view>
-					
-        </view>
-				
+					</view>
+
+				</view>
+
 				<!-- 右侧下部绿色卡片 -->
-        <view class="card green">
+				<view class="card green">
 					<!-- 卡片背景 -->
-          <image class="img-occupy" src="/static/Start/产业链图谱.png" mode="aspectFill" />
-					
+					<image class="img-occupy" src="/static/Start/产业链图谱.png" mode="aspectFill" />
+
 					<!-- 卡片内部信息 -->
 					<view class="right-card-inner">
 						<view class="right-card-text-wrap">
 							<!-- 上侧标题 -->
-					  	<text class="right-title">产业链图谱</text>
-						
-				  		<!-- 下侧胶囊按钮区域 -->
-				  		<view class="green-card-pill-wrap">
-						  	<image 
-	    					  	class="green-card-pill-bg" 
-						   			src="/static/Start/产业链图谱圆角矩形.png" 
-				  					mode="aspectFill" 
-					  		/>
-							  <text class="green-card-pill-text">点击进入</text>
-					  	</view>
+							<text class="right-title">产业链图谱</text>
+
+							<!-- 下侧胶囊按钮区域 -->
+							<view class="green-card-pill-wrap">
+								<image class="green-card-pill-bg" src="/static/Start/产业链图谱圆角矩形.png" mode="aspectFill" />
+								<text class="green-card-pill-text">点击进入</text>
+							</view>
 						</view>
-						
+
 						<!-- 卡片右侧图标 -->
 						<view class="green-card-icon-wrap">
-							<image 
-							    class="green-card-icon-bg" 
-									src="/static/Start/产业链图谱图标背景.png" 
-									mode="aspectFill"
-							/>
-							<image 
-							    class="green-card-icon"
-									src="/static/Start/知识图谱.png"
-									mode="aspectFill"
-							 />
+							<image class="green-card-icon-bg" src="/static/Start/产业链图谱图标背景.png" mode="aspectFill" />
+							<image class="green-card-icon" src="/static/Start/知识图谱.png" mode="aspectFill" />
 						</view>
-						
+
 					</view>
-        </view>
-				
-      </view>
-    </view>
-		
+				</view>
+
+			</view>
+		</view>
+
 		<!-- 中央菜单 -->
 		<MiddleMenu :middleList="middleList" />
-		
+
 		<!-- 底部产业链动态 -->
 		<ChainActivity :newsList="newsList" />
-  </view>
+	</view>
 </template>
 
-<script setup>
-import MiddleMenu from '../../components/Start/MiddleMenu.vue';
-import ChainActivity from '../../components/Start/ChainActivity.vue';
+<script>
+	import MiddleMenu from '../../components/Start/MiddleMenu.vue';
+	import ChainActivity from '../../components/Start/ChainActivity.vue';
 
-// 中间菜单数据
-const middleList=[
-	{
-		id:1,
-		text:'一网通办',
-		icon:'../../static/Start/一网通办图标.png',
-		url:'/pages/OneNet/OneNet'
-	},
-	{
-		id:2,
-		text:'产业链介绍',
-		icon:'../../static/Start/产业链介绍图标.png',
-		url:'/pages/OneNet/OneNet'
-	},
-	{
-		id:3,
-		text:'产业链政策',
-		icon:'../../static/Start/产业链政策图标.png',
-		url:'/pages/OneNet/OneNet'
-	}
-];
+	export default {
+		name:'Start',
+		
+		components: {
+			MiddleMenu,
+			ChainActivity
+		},
+		
+		data() {
+			return {
+				//中间菜单列表
+				middleList: [
+					{
+						id: 1,
+						text: '一网通办',
+						icon: '../../static/Start/一网通办图标.png',
+						url: '/pages/OneNet/OneNet'
+					},
+					{
+						id: 2,
+						text: '产业链介绍',
+						icon: '../../static/Start/产业链介绍图标.png',
+						url: '/pages/OneNet/OneNet'
+					},
+					{
+						id: 3,
+						text: '产业链政策',
+						icon: '../../static/Start/产业链政策图标.png',
+						url: '/pages/OneNet/OneNet'
+					}
+				],
 
-// 下方产业链动态数据
-const newsList=[
-	{
-		id:1,
-		title:'2024年中央驻赣单位支持南昌高质量发行...',
-		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
-		date:'8月15日',
-        image:'../../static/Start/产业链动态图片.png'
-	},
-	{
-		id:2,
-		title:'2024年中央驻赣单位支持南昌高质量发行...',
-		text:'为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
-		date:'8月15日',
-		image:'../../static/Start/产业链动态图片.png'
+				//底部新闻列表
+				newsList: [
+					{
+						id: 1,
+						title: '2024年中央驻赣单位支持南昌高质量发行...',
+						text: '为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
+						date: '8月15日',
+						image: '../../static/Start/产业链动态图片.png'
+					},
+					{
+						id: 2,
+						title: '2024年中央驻赣单位支持南昌高质量发行...',
+						text: '为进一步提升我省水上搜救能力，推动全省水上搜救工作整体协同发展，近日，省高航中心举办2024...',
+						date: '8月15日',
+						image: '../../static/Start/产业链动态图片.png'
+					}
+				]
+			}
+		},
+		
+		methods: {
+			/**
+			 *  @function applyChain
+			 *  @description 点击左侧申请企业上链卡片时触发
+			*/
+       applyChain(){
+				 uni.navigateTo({
+					url: '/pages/Apply/Apply'
+				})
+			 }
+		}
 	}
-];
 </script>
 
 <style scoped>
@@ -435,6 +448,5 @@ const newsList=[
 	height: 41rpx;
 	transform:translate(-50%,-50%);
 }
-
 
 </style>

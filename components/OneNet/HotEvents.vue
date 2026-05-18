@@ -33,12 +33,16 @@
 	</view>
 </template>
 
-<script setup>
-defineProps({
-	hotEvents:{
-		type:Array
+<script>
+	export default {
+		name:'HotEvent',
+		
+		props:{
+			hotEvents:{
+				type:Array
+			}
+		}
 	}
-});	
 </script>
 
 <style scoped>

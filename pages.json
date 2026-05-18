@@ -3,14 +3,16 @@
 		{
 			"path": "pages/Start/Start",
 			"style": {
-				"navigationBarTitleText": "Start"
+				"navigationBarTitleText": "Start",
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path" : "pages/OneNet/OneNet",
 			"style" : 
 			{
-				"navigationBarTitleText" : "OneNet"
+				"navigationBarTitleText" : "OneNet",
+				"navigationStyle":"custom"
 			}
 		},
 		{
@@ -19,11 +21,29 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/ApplyChain/ApplyChain",
+			"style" : 
+			{
+				//上链申请页面采用原生导航栏，左上角自带返回按钮
+				"navigationBarTitleText" : "上链申请",
+				//设置背景和文字颜色
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path" : "pages/Start/Start1/Start1",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 	"globalStyle": {
 		//全局隐藏原生导航栏
-		"navigationStyle":"custom",
+	  //"navigationStyle":"custom",
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
