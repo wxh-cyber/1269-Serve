@@ -12,6 +12,13 @@
 			{
 				"navigationBarTitleText" : "OneNet"
 			}
+		},
+		{
+			"path" : "pages/EnterpriseChain/EnterpriseChain",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 	"globalStyle": {
