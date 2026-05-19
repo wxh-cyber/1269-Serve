@@ -54,13 +54,25 @@
 		flex-direction:row;
 		justify-content:space-between;
 		padding:44rpx 30rpx;
+		/* gap仅表示最小间距，如果宽度扩大，实际间距会变大 */
 		gap:15rpx;
 	}
+	
+	/* 外层菜单容器在H5下的适配 */
+	/* #ifdef H5 */
+	@media screen and (max-width:560px) {
+		.menu-container {
+			flex-direction:column;
+		}
+	}
+	/* #endif */
 	
 	/* 单个菜单项样式 */
 	.menu-item {
 		position:relative;
-		width:220rpx;
+		width:100%;
+		/* 设置最小宽度后，当屏幕过窄，会导致中央菜单栏右侧不可见 */
+		/* min-width:220rpx; */
 		height:222rpx;
 		border-radius:16rpx;
 		

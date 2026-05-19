@@ -66,8 +66,8 @@
 	import HotEvents from '../../components/OneNet/HotEvents.vue';
 
 	export default {
-		name:'OneNet',
-		
+		name: 'OneNet',
+
 		components: {
 			ThemesList,
 			HotEvents
@@ -128,13 +128,13 @@
 			}
 		},
 
-    methods:{
+		methods: {
 			/**
 			 * @function goBack 返回上一页
 			 * @returns void
 			 * @description 点击左上角箭头返回上一页
-			 */ 
-			goBack(){
+			 */
+			goBack() {
 				uni.navigateBack();
 			}
 		}
@@ -196,7 +196,7 @@
 	/* 事件在线办理外层容器 */
 	.event-online-wrap {
 		position: relative;
-		width: 690rpx;
+		width: 100%;
 		height: 200rpx;
 		box-sizing: border-box;
 		border: 1px solid #fff;
@@ -338,7 +338,7 @@
 		justify-content: flex-start;
 		align-items: flex-start;
 
-		width: 690rpx;
+		width: 100%;
 		height: 170rpx;
 		padding: 20rpx 0 0 42rpx;
 		border-radius: 16rpx;

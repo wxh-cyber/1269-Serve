@@ -44,6 +44,8 @@
 
 <script>
 	export default {
+		name: 'ChainActivity',
+		
 		props:{
 			newsList: {
 				type: Array,
