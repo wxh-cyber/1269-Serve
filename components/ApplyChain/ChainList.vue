@@ -16,7 +16,7 @@
 	  	  </view>
 			
 		    <!-- 右侧删除按钮 -->
-		    <view class="delete-button-wrap">
+		    <view class="delete-button-wrap" @click="deleteChainApplyItem">
 			    <!-- 删除图标 -->
 	  	  	<image class="delete-icon" src="/static/ApplyChain/删除按钮图标.png" mode="aspectFill" />
 	  	  	<!-- 删除文本 -->
