@@ -137,7 +137,7 @@
 								placeholder="请输入产品服务"
 								border="surround"
 								height="75"
-								style="background:#f8f8f8;"
+								style="background:#f8f8f8"
 							></u--textarea>
 						</view>
 					</view>
@@ -145,6 +145,14 @@
 				
 				<!-- 中央分隔线 -->
 				<view class="separate-line"></view>
+				
+				<!--  申请产业链列表-->
+				<ChainList 
+				  :total="total" 
+					:chainApplyList="model1.info.chainApplyList" 
+					@change="handleChainListChange"
+				/>
+				
 		  </u--form>
 		</view>
 		
@@ -152,7 +160,13 @@
 </template>
 
 <script>
+import ChainList from '../../components/ApplyChain/ChainList.vue';	
+	
 export default {
+	components:{
+		ChainList
+	},
+	
 	data(){
 		return {
 			model1:{
@@ -171,15 +185,47 @@ export default {
 						//详细地址
 						address:'',
 						// 主营产品和服务
-						product:''
+						product:'',
+						//申请产业链列表
+						chainApplyList:[
+							{
+								id:1,
+								//所属产业链
+								industryChain:'现代家具产业链/木制家具',
+								//主营方向
+								businessDirection:''
+							},
+							{
+								id:2,
+								//所属产业链
+								industryChain:'现代家具产业链/木制家具',
+								//主营方向
+								businessDirection:''
+							}
+						]
 				}
 			},
 			
 		}
 	},
+
+  computed:{
+		//产业链列表长度
+		total(){
+			return this.model1.info.chainApplyList.length;
+		}
+	},
 	
 	methods:{
-		
+		/**
+		 *  @function handleChainListChange
+		 *  @description 产业链列表发生改变时触发
+		 *  @param {Array} newList 产业链列表
+		 *  @return {void}
+     */
+		handleChainListChange(newList){
+			this.model1.info.chainApplyList = newList;
+		}
 	}
 }
 </script>
@@ -223,6 +269,7 @@ export default {
 	font-size:28rpx;
 	font-weight:500;
 	line-height:1;
+	color:#000;
 }
 
 /* 文本框标签容器 */
@@ -265,6 +312,7 @@ export default {
 	width:calc(100%+56rpx);
 	height:16rpx;
 	margin-left:-28rpx;
+	margin-top:30rpx;
 	
 	background-color:#eee;
 }
