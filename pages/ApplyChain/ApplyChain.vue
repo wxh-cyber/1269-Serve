@@ -153,6 +153,45 @@
 					@change="handleChainListChange"
 				/>
 				
+				<!-- 产业链列表底部分隔线 -->
+				<view class="separate-line"></view>
+				
+				<!-- 是否规上企业 -->
+				<u-form-item prop="info.isRuleOnEnterprise" borderBottom>
+					<view class="form-item-radio">
+						<!-- 左侧标签 -->
+						<view class="label-wrap">
+							<text class="required">*</text>
+							<text class="label-text">是否规上企业</text>
+						</view>
+						
+						<!-- 右侧单选框 -->
+						<!-- 
+					  	  注意：
+						      对于u-radio-group，内部默认是flex:1;所以会挤占剩余空间
+						      同时两个内部的u-radio从左向右排，所以视觉上没有靠右
+					    -->
+						<u-radio-group 
+						  v-model="model1.info.isRuleOnEnterprise" 
+						  placement="row"
+						  labelColor="#000"
+						  :customStyle="{
+							  justifyContent:'flex-end',
+							  flex:'none'
+						  }"
+						>
+							<u-radio 
+							  :name="true" 
+							  label="是" 
+							  activeColor="#0dc477"
+							  :customStyle="{
+							    marginRight:'30rpx'
+							  }"
+							></u-radio>
+							<u-radio :name="false" label="否" activeColor="#0dc477"></u-radio>
+						</u-radio-group>
+					</view>
+				</u-form-item>
 		  </u--form>
 		</view>
 		
@@ -202,7 +241,9 @@ export default {
 								//主营方向
 								businessDirection:''
 							}
-						]
+						],
+						//是否规上企业
+						isRuleOnEnterprise:true
 				}
 			},
 			
@@ -315,5 +356,16 @@ export default {
 	margin-top:30rpx;
 	
 	background-color:#eee;
+}
+
+/* 包裹标签和单选框的外层容器 */
+.form-item-radio {
+	width:100%;
+	height:90rpx;
+	
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 </style>

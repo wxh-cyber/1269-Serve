@@ -9,14 +9,14 @@
 		    <view class="chain-list-title-wrap">
 		    	<!-- 左侧带序号绿色原点 -->
 		    	<view class="dot">
-	  		  	<text class="dot-index">{{item.id}}</text>
+	  		  	<text class="dot-index">{{index+1}}</text>
 			    </view>
 		    	<!-- 产业链标题 -->
 		    	<text class="chain-list-title">产业链</text>
 	  	  </view>
 			
 		    <!-- 右侧删除按钮 -->
-		    <view class="delete-button-wrap" @click="deleteChainApplyItem">
+		    <view class="delete-button-wrap" @click="deleteChainApplyItem(index)">
 			    <!-- 删除图标 -->
 	  	  	<image class="delete-icon" src="/static/ApplyChain/删除按钮图标.png" mode="aspectFill" />
 	  	  	<!-- 删除文本 -->
@@ -265,7 +265,23 @@ export default {
 		 *  @description 删除指定索引的产业链信息项
      */
 		deleteChainApplyItem(index){
+			this.innerChainApplyList=this.innerChainApplyList.filter(item => item.id!== index+1);
 			
+			//执行删除后，更新列表中的每一项的id
+			this.updateChainApplyItemId();
+			//子组件中的列表改动后，向父组件更新
+			this.emitChainListChange();
+		},
+		
+		/**
+		 *   @function updateChainApplyItemId
+		 *   @returns void
+		 *   @description 更新子组件内部产业链列表的单项id，防止由于多次增加删除导致列表中单项id混乱。
+         */
+        updateChainApplyItemId(){
+			for(let i=0;i<this.innerChainApplyList.length;i++){
+				this.innerChainApplyList[i].id=i+1;
+			}
 		},
 		
 		/**
@@ -408,6 +424,7 @@ export default {
 		font-weight:500;
 		color:#000;
 		line-height:1;
+		white-space: nowrap;
 	}
 	
 	/* 单个的表单输入框通用样式 */
