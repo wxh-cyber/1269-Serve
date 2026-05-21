@@ -5,7 +5,7 @@
 		<!-- 包裹表单容器 -->
 		<view class="content">
 			<!-- 页面表单 -->
-			<u--form labelPosition="left" :model="model1" ref="uForm">
+			<u--form labelPosition="left" :model="model1" :rules="rules" ref="uForm">
 				<!-- 企业名称 -->
 				<!-- 由于已经自定义了开头标签，故此处不在采用原生标签 -->
 				<u-form-item prop="info.companyName" class="form-item-input" borderBottom>
@@ -326,6 +326,42 @@
 						//企业简介
 						enterpriseIntro:'\n企业简介'
 					}
+				},
+				
+				//表单校验规则
+				rules:{
+					//企业名称
+					'info.companyName':{
+						type:'string',
+						required:true,
+						message:'请填写企业名称',
+						trigger:['blur']
+					},
+					//所属地区
+					'info.region':{
+						type:'string',
+						required:true,
+						message:'请填写所属地区',
+						trigger:['blur']
+					},
+					//社会信用代码
+					'info.companyCode':[{
+						type:'string',
+						required:true,
+						message:'请填写社会信用代码',
+						trigger:['blur'],
+					},
+					{
+						/**
+						 *   @function validator
+						 *   @description 社会信用代码校验函数
+						 */
+						validator(){
+							
+						},
+						message:'格式不对',
+						trigger:['blur','change']
+					}]
 				}
 			}
 		},
@@ -445,7 +481,16 @@
 			// 	}
 			// }
 			
-			
+			/**
+			 *  @function handleSubmit
+			 *  @returns void
+			 *  @description 提交后跳转到对应页面
+             */
+			handleSubmit(){
+				uni.navigateTo({
+					url:'/pages/Success/Success'
+				})
+			}
 		}
 	}
 </script>
