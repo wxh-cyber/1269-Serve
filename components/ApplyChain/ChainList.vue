@@ -96,6 +96,7 @@
 								fontWeight="500"
 			  				border="surround"
 								style="background:#f8f8f8 ;"
+								confirm-type="return"
 				  		>
 						  </u--textarea>
 						</view>
