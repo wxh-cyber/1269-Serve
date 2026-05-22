@@ -25,7 +25,7 @@
 	  	</view>
 		
 	  	<!-- 单项下方列表 -->
-		  <u--form ref="uForm" :model="innerChainApplyList[index]" labelPosition="left">
+		  <u--form ref="uForm" :model="item" :rules="rules" labelPosition="left">
 				
 				<!-- 所属产业链 -->
 				<u-form-item 
@@ -78,7 +78,7 @@
 				</u-form-item>
 				
 				<!-- 主营方向 -->
-				<u-form-item prop="bussinessDirection">
+				<u-form-item prop="businessDirection">
 					<view class="form-item-textarea">
 						<!-- 上方标签 -->
 						<view class="textarea-label-wrap">
@@ -89,9 +89,9 @@
 						<!-- 下方多行文本框 -->
 						<view class="textarea-box">
 						  <u--textarea
-					  	  v-model="innerChainApplyList[index].businessDirection"
+					  	  v-model="item.businessDirection"
 				  			placeholder="请输入主营方向"
-		  					height="75"
+		  					:height="75"
 						  	fontSize="28rpx"
 								fontWeight="500"
 			  				border="surround"
@@ -166,7 +166,25 @@ export default {
 			chainTypeList:[
 				{name:'现代家具产业链/木制家具'},
 				{name:'电子信息产业链/半导体产业链'}
-			]
+			],
+			
+			//表单校验规则
+			rules:{
+				//所属产业链
+				'industryChain':{
+					type:'string',
+					required:true,
+					message:'请选择产业链类型',
+					trigger:['blur','change']
+				},
+				//主营方向
+				'businessDirection':{
+					type:'string',
+					required:true,
+					message:'请输入主营方向',
+					trigger:['blur','change']
+				}
+			}
 		}
 	},
 	
@@ -208,14 +226,62 @@ export default {
 				return;
 			}
 			
+			//获取当前操作箱索引
 			let index = this.activeIndex;
 			this.innerChainApplyList[index].industryChain = action.name;
 			this.showChainType = false;
-			
+		
 			//向父组件传递变化
 			this.emitChainListChange();
 			
+			//手动触发表单校验规则
+			this.validateField(index,'industryChain');
+			
 			this.closeChainType();
+		},
+		
+		/**
+		 *  @function validateField
+		 *  @param {Number} index - 当前操作项索引
+		 *  @param {String} prop - 当前操作项属性
+		 *  @returns void
+		 *  @description 手动触发当前表单的校验规则，属于局部校验
+     */
+		validateField(index,prop){
+			this.$nextTick(()=>{
+				//将当前的表单对象统一加工成数组
+				const forms=Array.isArray(this.$refs.uForm)?this.$refs.uForm:[this.$refs.uForm];
+				//获取到当前被选中的表单单项
+				const form=forms[index];
+				
+				//如果当前单项存在，且具有校验规则
+				if(form &&form.validateField) {
+					form.validateField(prop);
+				}
+			});
+		},
+		
+		/**
+		 *  @function validate
+		 *  @returns Promise
+		 *  @description 对当前表单进行校验，返回Promise对象
+     */
+		validate(){
+			const forms=Array.isArray(this.$refs.uForm)?this.$refs.uForm:[this.$refs.uForm];
+			
+			/**
+			 *  如何理解这里的每个单项的form.validate()方法？
+			 *  form.validate()是uView表单组件自带的方法。
+			 *  具体过程如下：
+			 *    1.读取当前 u--form 的 model
+       *    2.读取当前 u--form 的 rules
+       *    3.找到它内部所有 u-form-item 的 prop
+       *    4.按 prop 去 model 里取值
+       *    5.用对应的 rules[prop] 校验
+       *    6.校验通过则返回成功的 Promise
+       *    7.校验失败则返回 rejected Promise，并显示错误信息  
+       */
+			return Promise.all(forms.map(form => form.validate()));
 		},
 		
 		/**
@@ -380,7 +446,7 @@ export default {
 		align-items:center;
 		
 		border:1rpx solid #e7564d;
-		border-radius:20rpx;
+		border-radius:12rpx;
 		background: #ffedec;
 	}
 	

@@ -20,7 +20,7 @@
 			<!-- 右侧两个垂直的申请信息 -->
 			<view class="apply-information">
 				<!-- 右侧上部蓝色卡片 -->
-				<view class="card blue">
+				<view class="card blue" @click="goEnterpriseChain">
 					<!-- 卡片背景 -->
 					<image class="img-occupy" src="/static/Start/上链企业数.png" mode="aspectFill" />
 
@@ -144,6 +144,16 @@
        applyChain(){
 				 uni.navigateTo({
 					url: '/pages/ApplyChain/ApplyChain'
+				})
+			 },
+			 
+			 /**
+				*  @function goEnterpriseChain
+				*  @description 前往企业上链 
+        */
+			 goEnterpriseChain(){
+				 uni.navigateTo({
+					url: '/pages/EnterpriseChain/EnterpriseChain'
 				})
 			 }
 		}
