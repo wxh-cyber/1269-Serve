@@ -34,8 +34,17 @@
 						<text class="required">*</text>
 						<text class="label-text">社会信用代码</text>
 					</view>
-					<u--input v-model="model1.info.companyCode" inputAlign="right" fontSize="28rpx" color="#707070"
-						placeholder="请输入社会信用代码" border="none"></u--input>
+					<u--input 
+						:value="displayCompanyCode"
+						inputAlign="right" 
+						fontSize="28rpx" 
+						color="#707070"
+						placeholder="请输入社会信用代码" 
+						border="none"
+						@focus="handleCompanyCodeFocus"
+						@blur="handleCompanyCodeBlur"
+						@input="handleCompanyCodeInput"
+					></u--input>
 				</u-form-item>
 
 				<!-- 联系人 -->
@@ -85,7 +94,7 @@
 				</u-form-item>
 
 				<!-- 主营产品和服务 -->
-				<u-form-item prop="info.address">
+				<u-form-item prop="info.product">
 					<view class="form-item-textarea">
 						<!-- 上方标签 -->
 						<view class="textarea-label-wrap">
@@ -115,7 +124,12 @@
 				<view class="separate-line"></view>
 
 				<!--  申请产业链列表 -->
-				<ChainList :total="total" :chainApplyList="model1.info.chainApplyList" @change="handleChainListChange" />
+				<ChainList 
+					ref="chainList"
+				  :total="total" 
+					:chainApplyList="model1.info.chainApplyList" 
+					@change="handleChainListChange" 
+				/>
 
 				<!-- 产业链列表底部分隔线 -->
 				<view class="separate-line"></view>
@@ -245,8 +259,8 @@
 								color="#000"
 								placeholder="请输入企业简介" 
 								border="surround" 
-								height="75" 
-								autoHeight 
+								:height="75" 
+								:autoHeight="true" 
 								style="background:#f8f8f8;"
 								confirm-type="return"
 							></u--textarea>
@@ -277,6 +291,11 @@
 
 		data() {
 			return {
+				//社会信用码文本框是否聚焦
+				isCompanyCodeFocus:false,
+				//实际展示的社会信用码
+				displayCompanyCode:'',
+				
 				model1: {
 					// 表单中的相关信息
 					info: {
@@ -306,7 +325,7 @@
 							{
 								id: 2,
 								//所属产业链
-								industryChain: '现代家具产业链/木制家具',
+								industryChain: '',
 								//主营方向
 								businessDirection: ''
 							}
@@ -324,7 +343,7 @@
 						//企业照片
 						fileList1: [],
 						//企业简介
-						enterpriseIntro:'\n企业简介'
+						enterpriseIntro:'企业简介'
 					}
 				},
 				
@@ -335,33 +354,43 @@
 						type:'string',
 						required:true,
 						message:'请填写企业名称',
-						trigger:['blur']
+						trigger:['blur','change']
 					},
 					//所属地区
 					'info.region':{
 						type:'string',
 						required:true,
 						message:'请填写所属地区',
-						trigger:['blur']
+						trigger:['blur','change']
 					},
 					//社会信用代码
 					'info.companyCode':[{
+						//必填规则
 						type:'string',
 						required:true,
 						message:'请填写社会信用代码',
-						trigger:['blur'],
+						trigger:['blur','change'],
 					},
 					{
-						/**
-						 *   @function validator
-						 *   @description 社会信用代码校验函数
-						 */
-						validator(){
-							
-						},
-						message:'格式不对',
+						//正则判断为字母或者数字
+						pattern:/^[a-zA-Z0-9]*$/,
+						message:'社会信用代码只能为字母或数字',
 						trigger:['blur','change']
-					}]
+					}],
+					//详细地址
+					'info.address':{
+						type:'string',
+						required:true,
+						message:'请填写详细地址',
+						trigger:['blur','change']
+					},
+					//主营产品和服务
+					'info.product':{
+						type:'string',
+						required:true,
+						message:'请填写主要产品和服务',
+						trigger:['blur','change']
+					}
 				}
 			}
 		},
@@ -382,6 +411,63 @@
 			 */
 			handleChainListChange(newList) {
 				this.model1.info.chainApplyList = newList;
+			},
+			
+			/**
+			 *  @function maskCompanyCode
+			 *  @param {*} code - 社会信用代码输入字段
+			 *  @returns {String} value - 进行掩码处理后的字段
+			 *  @description 对社会信用代码进行掩码处理 
+       */
+			maskCompanyCode(code){
+				//如果信用代码字段本身为空，则直接返回
+        if(!code)	return;
+				
+				const value=String(code).trim();
+				
+				//统一社会信用代码通常是18位
+				//如果输入字段位数小于9，则原样显示
+				if(value.length<=9) return value;
+				
+				const start=value.slice(0,9);
+				const end=value.slice(-1);
+				const stars='*'.repeat(value.length-9);
+				
+				//拼接后形成新的掩码
+				return `${start}${stars}${end}`;
+			},
+			
+			/**
+			 *  @function handleCompanyCodeFocus
+			 *  @returns void
+			 *  @description 处理社会信用代码文本框聚焦 
+       */
+			handleCompanyCodeFocus(){
+				this.isCompanyCodeFocus=true;
+				this.displayCompanyCode=this.model1.info.companyCode;
+			},
+			
+			/**
+			 *  @function handleCompanyCodeBlur
+			 *  @returns void
+			 *  @description 处理社会信用代码文本框失焦 
+       */
+			handleCompanyCodeBlur(){
+				this.isCompanyCodeFocus=false;
+				this.displayCompanyCode=this.maskCompanyCode(this.model1.info.companyCode);
+			},
+			
+			/**
+			 *  @function handleCompanyCodeInput
+			 *  @param {*} value
+			 *  @returns void
+			 *  @description 处理社会信用代码输入框文本变化  
+       */
+			handleCompanyCodeInput(value){
+				this.model1.info.companyCode=value;
+				if(this.isCompanyCodeFocus) {
+					this.displayCompanyCode=value;
+				}
 			},
 
 			/**
@@ -486,10 +572,33 @@
 			 *  @returns void
 			 *  @description 提交后跳转到对应页面
              */
-			handleSubmit(){
+			async handleSubmit(){
+				/*
+				try {
+					//如果父组件表单校验先触发错误，则直接抛出error，不会再触发子组件校验规则
+					await this.$refs.uForm.validate();
+					await this.$refs.chainList.validate();
+					
+					//跳转到提交成功页面
+					uni.navigateTo({
+						url:'/pages/Success/Success'
+					});
+				}catch(errors){
+					
+				}*/
+				
+				const results=await Promise.allSettled([
+					this.$refs.uForm.validate(),
+					this.$refs.chainList.validate()
+				]);
+				
+				const hasError=results.some(item => item.status==='rejected');
+				if(hasError) return;
+				
+				//跳转到提交成功页面
 				uni.navigateTo({
-					url:'/pages/Success/Success'
-				})
+						url:'/pages/Success/Success'
+				});
 			}
 		}
 	}
