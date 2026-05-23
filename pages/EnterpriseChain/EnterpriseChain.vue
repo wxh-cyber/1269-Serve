@@ -3,7 +3,7 @@
 		<!-- 最顶部区域，包括左侧箭头和中央标题 -->
 		<view class="top">
 			<!-- 左侧箭头 -->
-			<view class="left-arrow"><</view>
+			<view class="left-arrow" @click="goBack"><</view>
 			<!-- 中央标题 -->
 			<text class="top-title">上链企业</text>
 		</view>
@@ -27,26 +27,38 @@
 		</view>
 		
 		<!-- 中央行业展示区域 -->
-		<view class="industry-card">
-			<!-- 内部单项 -->
-			<view class="industry-item" v-for="(item,index) in industryList" :key="index" >
-		    <!-- 单项图片 -->
-				<view class="industry-item-bg-wrap">
-					<view class="industry-item-icon-wrap">
-				  	<image class="industry-item-bg" :src="item.icon" mode="aspectFill" />
-					</view>
-				</view>
+		<!-- 在卡片外层包裹一层容器，实现边框的渐变效果 -->
+		<view class="industry-card-bg">
+		  <view class="industry-card" @click="goSearch">
+	  		<!-- 内部单项 -->
+	  		<view class="industry-item" v-for="(item,index) in industryList" :key="index" >
+		      <!-- 单项图片 -->
+			  	<view class="industry-item-bg-wrap">
+			  		<view class="industry-item-icon-wrap">
+			  	  	<image class="industry-item-bg" :src="item.icon" mode="aspectFill" />
+			  		</view>
+				  </view>
 				
-				<!-- 底部文本 -->
-				<text class="industry-title">{{item.title}}</text>
-			</view>
+			  	<!-- 底部文本 -->
+			  	<text class="industry-title">{{item.title}}</text>
+		  	</view>
+		  </view>
 		</view>
+		
+		<!-- 下方企业列表 -->
+		<EnterpriseList :goSearch="goSearch" />
 		
 	</view>
 </template>
 
 <script>
+import EnterpriseList from '../../components/EnterpriseChain/EnterpriseList.vue';
+	
 export default {
+	components:{
+		EnterpriseList
+	},
+	
 	data(){
 		return {
 			//行业列表
@@ -104,7 +116,27 @@ export default {
 	},
 	
 	methods:{
+		/**
+		 *  @function goBack
+		 *  @returns void
+		 *  @description 返回首页 
+     */
+		goBack(){
+			uni.navigateBack({
+				url:'/pages/Start/Start'
+			});
+		},
 		
+		/**
+		 *  @function goSearch
+		 *  @returns void
+		 *  @description 跳转到企业搜索页面 
+     */
+		goSearch(){
+			uni.navigateTo({
+				url:'/pages/EnterpriseSearch/EnterpriseSearch'
+			});
+		}
 	}
 }
 </script>
@@ -240,16 +272,44 @@ export default {
 /* 中央行业展示区域外部卡片 */
 .industry-card {
 	margin-top:8rpx;
-	width:calc(100% - 60rpx);
-	height:100%;
+	width:100%;
+	height:100%; 
 	padding-top:38rpx;
+	padding-bottom:38rpx;
 	box-sizing: border-box;
 	border-radius:12rpx;
-	border:1rpx solid #fff;
+	/* border:1rpx solid #fff; */
+	/* 
+	   注意：不要在Uniapp中采用border-image来实现边框渐变效果。
+		 因为对圆角支持不好，且在不同端表现不稳定。
+	 */
+	/* border-image:linear-gradient(45deg,#d0ede3,#90d6ba); */
 	
 	display:grid;
 	grid-template-columns:repeat(4,1fr);
 	row-gap:37rpx;
+	
+	background: linear-gradient(
+	  to bottom,
+		#8dd1b8 0%,
+		#d4efe6 42%,
+		#f6fbf7 70%,
+		#ffffff 100%
+	);
+	box-shadow:0rpx 10rpx 10rpx 0rpx rgba(0,0,0,0.1);
+}
+
+/* 卡片容器外侧背景 */
+.industry-card-bg {
+	width:calc(100% - 60rpx);
+	height:100%;
+	padding:2rpx;
+	border-radius:14rpx;
+	background: linear-gradient(45deg,#d0ede3,#90d6ba);
+	
+	display:flex;
+	justify-content:center;
+	align-items:center;
 }
 
 /* 内部单项最外层容器 */

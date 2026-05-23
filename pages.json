@@ -42,6 +42,24 @@
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationBarTextStyle": "black"
 			}
+		},
+		{
+			"path" : "pages/EnterpriseSearch/EnterpriseSearch",
+			"style" : 
+			{
+				"navigationBarTitleText" : "企业列表",
+				"navigationBarBackgroundColor": "#FFF",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path" : "pages/EnterpriseDetail/EnterpriseDetail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "企业详情",
+				"navigationBarBackgroundColor": "#FFF",
+				"navigationBarTextStyle": "black"
+			}
 		}
 	],
 	"globalStyle": {

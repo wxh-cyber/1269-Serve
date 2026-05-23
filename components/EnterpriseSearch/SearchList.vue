@@ -1,28 +1,12 @@
 <template>
-	<!-- 最外层产业链列表容器 -->
-	<view class="enterprise-list-container">
-		<!-- 列表顶部，包括左侧标题和右侧查看更多 -->
-		<view class="enterprise-list-top">
-			<!-- 左侧标题 -->
-			<view class="enterprise-list-title-wrap">
-				<view class="line"></view>
-				<text class="enterprise-list-title">企业列表</text>
-			</view>
-			
-			<!-- 右侧 -->
-			<text class="more" @click="goSearch">查看更多 ></text>
-		</view>
-		
-		<!-- 企业列表内容 -->
-		<view class="enterprise-list">
-			<!-- 列表内部单个卡片 -->
-			<view 
-			  class="enterprise-list-item" 
-				v-for="(item,index) in enterpriseList" 
-				:key="index"
-				@click="goDetail"
-			>
-				<!-- 卡片内部标题 -->
+	<view class="search-list-container">
+		<view 
+		  class="card" 
+			v-for="(item,index) in innersearchList" 
+			:key="index" 
+			@click="goDetail"
+		>
+			<!-- 卡片内部标题 -->
 				<text class="item-title">{{item.companyName}}</text>
 				
 				<!-- 卡片中央内容 -->
@@ -41,12 +25,20 @@
 						
 						<!-- 右侧下方并排标签 -->
 						<view class="tag-wrap">
-							<view class="tag tag-orange" >
+							<view 
+							  class="tag"
+								:class="index%2==0?'tag-orange':'tag-blue'"
+								v-for="(tag,index) in item.companyTags"
+								:key="index"
+							>	
+							  {{tag}}
+							</view>
+							<!-- <view class="tag tag-orange" >
 								规上企业
 							</view>
 							<view class="tag tag-blue">
 								现代家具
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -87,132 +79,104 @@
 
 <script>
 	export default {
-		name:'EnterpriseList',
+		name:'SearchList',
 		
 		props:{
-			goSearch:{
-				type:Function,
-				required:true
+			searchList:{
+				type:Array
 			}
 		},
 		
 		data(){
 			return {
 				/**
-				 *  @typedef {Object} enterpriseItem - 单个企业列表项
+				 *  @typedef {Array} companyTags 
+				 *  @property {String} companyTag - 企业标签
+				 */
+				/**
+				 *  @typedef {Object} searchListItem - 单个企业列表项
 				 *  @property {String} companyName - 企业名称
 				 *  @property {String} companyBg - 企业背景图
 				 *  @property {String} companyIntro - 企业介绍
+				 *  @property {companyTags} companyTags - 企业标签
 				 *  @property {String} companyAddress - 企业地址
 				 *  @property {String} companyType - 企业类型
-         */
+				 */
 				/**
-				 *  @typedef enterpriseList - 企业列表
+				 *  @typedef innersearchList - 企业列表
 				 *  @type {Array}
-				 *  @property {enterpriseItem} enterpriseItem - 单个企业列表项
-         */
-				enterpriseList:[
-					{
-						companyName:'赣州汇明木业有限公司',
-						companyBg:'/static/EnterpriseChain/企业列表图片.png',
-						companyIntro:'木制家具产品政府采购，省内企业优先考虑。',
-						companyAddress:'赣州市镜坝镇家具小镇',
-						companyType:'链主龙头企业'
-					},
-					{
-						companyName:'赣州汇明木业有限公司',
-						companyBg:'/static/EnterpriseChain/企业列表图片.png',
-						companyIntro:'木制家具产品政府采购，省内企业优先考虑。',
-						companyAddress:'赣州市镜坝镇家具小镇',
-						companyType:'链主龙头企业'
-					}
-				]
+				 *  @property {searchListItem} searchListItem - 单个企业列表项
+				 */
+				innersearchList:[
+					// {
+					// 		companyName:'赣州汇明木业有限公司',
+					// 		companyBg:'/static/EnterpriseSearch/企业列表图片.png',
+					// 		companyIntro:'木制家具产品政府采购，省内企业优先考虑。',
+					// 		companyTags:['规上企业','现代家具'],
+					// 		companyAddress:'赣州市镜坝镇家具小镇',
+					// 		companyType:'链主龙头企业'
+					// 	},
+					// 	{
+					// 		companyName:'赣州汇明木业有限公司赣州汇明木业有限公司两行样式展示',
+					// 		companyBg:'/static/EnterpriseSearch/企业列表图片.png',
+					// 		companyIntro:'木制家具产品政府采购，省内企业优先考虑。',
+					// 		companyTags:['规上企业'],
+					// 		companyAddress:'赣州市镜坝镇家具小镇',
+					// 		companyType:'链主龙头企业'
+					// 	},
+					// 	{
+					// 		companyName:'赣州汇明木业有限公司赣州汇明木业有限公司两行样式展示',
+					// 		companyBg:'/static/EnterpriseSearch/企业列表图片.png',
+					// 		companyIntro:'木制家具产品政府采购，省内企业优先考虑。',
+					// 		companyTags:['现代家具'],
+					// 		companyAddress:'赣州市镜坝镇家具小镇',
+					// 		companyType:'链主龙头企业'
+					// 	}
+					]
+			}
+		},
+		
+		watch:{
+			searchList:{
+				immediate:true,
+				deep:true,
+				handler(newVal){
+					this.innersearchList=newVal.map( item => ({...item}));
+				}
 			}
 		},
 		
 		methods:{
 			/**
-				 *  @function goDetail
-				 *  @returns void 
-				 *  @description 跳转到企业详情页面 
-			   */
-				goDetail(){
-					uni.navigateTo({
-						url:'/pages/EnterpriseDetail/EnterpriseDetail'
-					})
-			}
+			 *  @function goDetail
+			 *  @returns void 
+			 *  @description 跳转到企业详情页面 
+       */
+			goDetail(){
+				uni.navigateTo({
+					url:'/pages/EnterpriseDetail/EnterpriseDetail'
+				})
 		}
 	}
+}
 </script>
 
 <style scoped>
-	/* 企业列表最外层容器 */
-	.enterprise-list-container {
+	/* 最外侧企业搜索结果容器 */
+	.search-list-container {
+		margin-top:35rpx;
 		width:calc(100% - 60rpx);
-		
-		display:flex;
-		flex-direction:column;
-		justify-content:center;
-	}
-	
-	/* 企业列表顶部容器 */
-	.enterprise-list-top {
-		margin-top:64rpx;
-		width:100%;
-		height:100%;
-		
-		display:flex;
-		flex-direction:row;
-		justify-content:space-between;
-		align-items:center;
-	}
-	
-	/* 左侧标题外侧容器 */
-	.enterprise-list-title-wrap {
-		display:flex;
-		flex-direction:row;
-		justify-content:center;
-		align-items:center;
-	}
-	
-	/* 标题左侧细线 */
-	.line {
-		width:6rpx;
-		height:32rpx;
-		margin-right:10rpx;
-		background: #0dc477;
-		border-radius:999rpx;
-	}
-	
-	/* 左侧标题文本 */
-	.enterprise-list-title {
-		font-size:32rpx;
-		font-weight:bold;
-		color:#000;
-	}
-	
-	/* 右侧查看更多 */
-	.more {
-		font-size:24rpx;
-		font-weight:normal;
-		color:#999;
-	}
-	
-	/* 企业列表 */
-	.enterprise-list {
-		margin-top:30rpx;
-		width:100%;
 		height:100%;
 		
 		display:flex;
 		flex-direction:column;
 		justify-content:flex-start;
-		align-items: center;
+		align-items:center;
 	}
 	
-  /* 单个企业列表项 */
-	.enterprise-list-item {
-	  margin-bottom:22rpx;
+	/* 单项搜索卡片样式 */
+	.card {
+		margin-bottom:22rpx;
 		width:100%;
 		height:100%;
 		padding:32rpx 35rpx;
@@ -223,6 +187,7 @@
 		flex-direction:column;
 		justify-content: flex-start;
 		
+		background: #fff;
 		box-shadow:0rpx 10rpx 10rpx 0rpx rgba(0,0,0,0.1);
 	}
 	
@@ -231,7 +196,7 @@
 		font-size:32rpx;
 		font-weight:600;
 		color:#000;
-		line-height:1;
+		line-height:1.5;
 	}
 	
 	/* 列表卡片内部内容 */
