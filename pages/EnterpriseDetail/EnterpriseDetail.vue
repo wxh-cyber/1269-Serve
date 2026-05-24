@@ -16,13 +16,64 @@
 				企业概况
 			</view>
 			<view class="enterprise-basic-content">
+				<!-- 主营产品/服务 -->
 				<view class="info-line">
-				  <text class="label-text">主营产品/服务：</text>
-					<text class="basic-content-text">{{companyBasicInfo.product}}</text>
+				  <text class="basic-content-text">
+					  <text class="label-text">主营产品/服务：</text>{{companyBasicInfo.product}}
+				  </text>
+				</view>
+				
+				<!-- 所属产业链 -->
+				<view class="info-line">
+				  <text class="basic-content-text">
+					  <text class="label-text">所属产业链：</text>{{companyBasicInfo.chain}}
+				  </text>
+				</view>
+				
+				<!-- 产业链类型 -->
+				<view class="info-line">
+					<text class="basic-content-text">
+						<text class="label-text">产业链类型：</text>{{companyBasicInfo.chainType}}
+					</text>
+				</view>
+				
+				<!-- 企业实力 -->
+				<view class="info-line">
+					<text class="basic-content-text">
+						<text class="label-text">企业实力：</text>{{companyBasicInfo.capacity}}
+					</text>
 				</view>
 			</view>
 		</view>
 		
+		<!-- 分隔线 -->
+		<view class="separate-line"></view>
+		
+		<!-- 底部企业简介 -->
+		<view class="enterprise-intro-wrap">
+			<!-- 上方企业简介标题 -->
+			<view class="enterprise-intro-title">
+				企业简介
+			</view>
+			
+			<!-- 中央企业介绍文本 -->
+			<view class="enterprise-intro-content">
+				<view class="enterprise-intro-paragraph" v-for="(item,index) in companyIntro.text" :key="index">
+					{{item}}
+				</view>
+			</view>
+			
+			<!-- 底部企业图片 -->
+			<view class="enterprise-image-wrap">
+				<view class="enterprise-image-border">
+				    <image 
+					  class="enterprise-image" 
+					  src="/static/EnterpriseDetail/企业图片.png" 
+					  mode="aspectFill" 
+					/>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -49,11 +100,19 @@
 					//主营产品和服务
 					product:'板、密度板制造与销售；板材贴面板、密度板制造与销售',
 					//所属产业链
-					chain:'',
+					chain:'现代家居产业链/木质家具',
 					//产业链类型
-					chainType:'',
+					chainType:'供应链、制造链',
 					//企业实力
-					capacity:''
+					capacity:'规上企业、小巨人企业、专精特新企业'
+				},
+				
+				//企业简介
+				companyIntro:{
+					text:[
+						'赣州汇明木业有限公司，成立于2014年，位于江西省赣州市，是一家以从事家具制造业为主的企业。企业注册资本27696.6947万人民币，实缴本22094.274933万人民币。\n',
+						'通过天眼查大数据分析，赣州汇明木业有限公司共对外投资了6家企业，参与招投标项目4次；知识产权方面有商标信息1条，专利信息63条，著作权6条；此外企业还拥有行政许可7个。'
+					]
 				}
 			}
 		},
@@ -68,7 +127,7 @@
 .detail-container {
 	width:100%;
 	min-height:100vh;
-  box-sizing: border-box;
+    box-sizing: border-box;
 	
 	display:flex;
 	flex-direction: column;
@@ -121,6 +180,11 @@
 	background: #fff;
 }
 
+/* 包裹标签和文本内容的单项容器 */
+.info-line {
+	width:100%;
+}
+
 /* 企业概况标题 */
 .enterprise-basic-title {
 	width:100%;
@@ -138,16 +202,11 @@
 	padding:32rpx;
 	width:100%;
 	height:100%;
+	box-sizing: border-box;
 	
 	display:flex;
 	flex-direction:column;
 	justify-content:flex-start;
-}
-
-/* 每一个属性文本单独占据一行 */
-.info-line {
-	display:block;
-	
 }
 
 /* 左侧标签和右侧企业详情文本的通用样式 */
@@ -155,7 +214,7 @@
 .basic-content-text {
 	font-size:28rpx;
 	font-weight:400;
-	line-height:1.5;
+	line-height:1.8;
 }
 
 /* 左侧标签样式 */
@@ -165,6 +224,94 @@
 
 /* 右侧企业详情文本样式 */
 .basic-content-text {
+	display:block;
+	width:100%;
+	
+	word-break:break-all;
+	white-space: normal;
 	color:#000;
+}
+
+/* 中央分隔线 */
+.separate-line {
+	width:100%;
+	height:16rpx;
+	
+	background: #eee;
+}
+
+/* 底部企业简介最外层容器 */
+.enterprise-intro-wrap {
+	width:100%;
+	height:100%;
+	box-sizing: border-box;
+	
+	display:flex;
+	flex-direction:column;
+	justify-content: flex-start;
+	
+	background: #fff;
+}
+
+/* 上方企业简介标题 */
+.enterprise-intro-title {
+	width:100%;
+	padding:34rpx;
+	border-bottom:2rpx solid #eee;
+	
+	font-size:32rpx;
+	font-weight:600;
+	color:#000;
+	line-height:1;
+}
+
+/* 中央介绍文本外层容器 */
+.enterprise-intro-content {
+	height:100%;
+	padding:32rpx;
+	box-sizing: border-box;
+}
+
+/* 中央企业介绍文本 */
+.enterprise-intro-paragraph {
+	width:100%;
+	
+	font-size:28rpx;
+	font-weight:500;
+	color:#666;
+	line-height:1.8;
+	
+	/* 让文本两端对齐 */
+	text-align: justify;
+	/* 文本往后缩进2字符 */
+	text-indent: 2rem;
+	word-break: break-all;
+}
+
+/* 企业详情图片外层容器 */
+.enterprise-image-wrap {
+	width:100%;
+	height:410rpx;
+	box-sizing: border-box;
+	
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 企业详情图片内层边界 */
+.enterprise-image-border {
+	position: relative;
+	width:calc(100% - 60rpx);
+	height:100%;
+}
+
+/* 企业详情图片 */
+.enterprise-image {
+	position: absolute;
+	inset:0;
+	width:100%;
+	height:100%;
 }
 </style>

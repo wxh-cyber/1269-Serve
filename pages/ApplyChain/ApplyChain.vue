@@ -685,7 +685,7 @@
 
 	/* 中央分隔线 */
 	.separate-line {
-		width: calc(100%+56rpx);
+		width: calc(100% + 56rpx);
 		height: 16rpx;
 		margin-left: -28rpx;
 		margin-top: 30rpx;
